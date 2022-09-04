@@ -1,8 +1,7 @@
 package leetcode
 
 import (
-	"strconv"
-	"strings"
+	"fmt"
 	"testing"
 )
 
@@ -31,11 +30,7 @@ func TestThreeSum(t *testing.T) {
 		}},
 	}
 	for _, tc := range testCases {
-		s := make([]string, len(tc.nums))
-		for i := range tc.nums {
-			s[i] = strconv.Itoa(tc.nums[i])
-		}
-		t.Run(strings.Join(s, ","), func(t *testing.T) {
+		t.Run(fmt.Sprint(tc.nums), func(t *testing.T) {
 			got := threeSum(tc.nums)
 			for i := range got {
 				sum := 0
