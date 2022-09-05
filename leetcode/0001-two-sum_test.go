@@ -2,7 +2,6 @@ package leetcode
 
 import (
 	"fmt"
-	"reflect"
 	"testing"
 )
 
@@ -20,7 +19,10 @@ func TestTwoSum(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(fmt.Sprint(tc.nums), func(t *testing.T) {
 			got := twoSum(tc.nums, tc.target)
-			if !reflect.DeepEqual(got, tc.want) {
+			if len(got) != 2 {
+				t.Errorf("Want: %v. Got: %v", tc.want, got)
+			}
+			if tc.nums[got[0]]+tc.nums[got[1]] != tc.target {
 				t.Errorf("Want: %v. Got: %v", tc.want, got)
 			}
 		})
