@@ -1,10 +1,5 @@
 package leetcode
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
 func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	// This solution has less mechanical sympathy (way more cache misses), but doesn't need any additional memory
 	count := n
