@@ -26,3 +26,7 @@ func fromList(head *ListNode) []int {
 	}
 	return list
 }
+
+type Void struct{}
+
+var void Void
