@@ -5,11 +5,6 @@ import (
 	"strings"
 )
 
-const (
-	left  = "({["
-	right = ")}]"
-)
-
 type Stack []int
 
 func (s *Stack) Push(v int) {
@@ -28,6 +23,10 @@ func (s *Stack) IsEmpty() bool {
 }
 
 func isValid(s string) bool {
+	const (
+		left  = "({["
+		right = ")}]"
+	)
 	stack := Stack{}
 	for _, r := range s {
 		ch := byte(r)
