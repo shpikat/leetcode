@@ -1,5 +1,11 @@
 package leetcode
 
+import (
+	"fmt"
+	"strconv"
+	"strings"
+)
+
 type ListNode struct {
 	Val  int
 	Next *ListNode
@@ -30,3 +36,48 @@ func fromList(head *ListNode) []int {
 type Void struct{}
 
 var void Void
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
+func toBinaryTree(s string) *TreeNode {
+	// See https://support.leetcode.com/hc/en-us/articles/360011883654-What-does-1-null-2-3-mean-in-binary-tree-representation-
+	trimmed := strings.Trim(s, "[]{}")
+	if len(trimmed) == 0 {
+		return nil
+	}
+
+	var nodes []*TreeNode
+	for _, split := range strings.Split(trimmed, ",") {
+		var node *TreeNode
+		x := strings.TrimSpace(split)
+		if x != "null" {
+			val, err := strconv.Atoi(x)
+			if err != nil {
+				fmt.Println("Error parsing integer: " + x)
+			}
+			node = &TreeNode{Val: val}
+		}
+		nodes = append(nodes, node)
+	}
+
+	root := nodes[0]
+	kid := 1
+	for i := 0; i < len(nodes); i++ {
+		node := nodes[i]
+		if node != nil {
+			if kid < len(nodes) {
+				node.Left = nodes[kid]
+				kid++
+				if kid < len(nodes) {
+					node.Right = nodes[kid]
+					kid++
+				}
+			}
+		}
+	}
+	return root
+}
