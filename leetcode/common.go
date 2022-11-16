@@ -81,3 +81,28 @@ func toBinaryTree(s string) *TreeNode {
 	}
 	return root
 }
+
+func fromBinaryTree(root *TreeNode) string {
+	var elems []string
+
+	level := []*TreeNode{root}
+	for len(level) != 0 {
+		var next []*TreeNode
+		nulls := 0
+		for _, node := range level {
+			if node == nil {
+				nulls++
+			} else {
+				for i := 0; i < nulls; i++ {
+					elems = append(elems, "null")
+				}
+				nulls = 0
+				elems = append(elems, strconv.Itoa(node.Val))
+				next = append(next, node.Left, node.Right)
+			}
+		}
+		level = next
+	}
+
+	return "[" + strings.Join(elems, ",") + "]"
+}
